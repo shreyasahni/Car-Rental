@@ -20,4 +20,7 @@ public class Cars {
 	public String returnModel() {
 		return Model;
 	}
+	public int returnPlate() {
+		return PlateNo;
+	}
 }

@@ -14,6 +14,14 @@ public class Customer {
 	public String returnPassword() {
 		return Password;
 	}
+	public void assignC(String nm, long ph, String em, String psw) {
+		Random rand=new Random();
+		Name=nm;
+		PhoneNo=ph;
+		Email=em;
+		Password=psw;
+		ID=rand.nextInt(100);
+	}
 	public void register() {
 		Scanner sc=new Scanner(System.in);
 		Random rand=new Random();

@@ -11,7 +11,7 @@ public class Bill {
 	float Price;
 	ArrayList<String> Stops=new ArrayList<String>();
 	public void calculateFare() {
-		Price=(Stops.size()-1)*(Driv.Car.returnStop())+Driv.Car.returnBase();
+		Price=(Stops.size()-2)*(Driv.getCar().returnStop())+Driv.getCar().returnBase();
 	}
 	public void addStops() {
 		Scanner sc=new Scanner(System.in);
@@ -20,11 +20,12 @@ public class Bill {
 		Stops.add(sc.next());
 		System.out.println("Enter drop location: ");
 		Stops.add(sc.next());
-		do {
-			System.out.println("Do you have any intermediate stops? (Y/N)");
-			choice=sc.next().charAt(0);
+		System.out.println("Do you have any intermediate stop? (Y/N)");
+		choice=sc.next().charAt(0);
+		if(choice=='y'||choice=='Y') {
+			System.out.println("Enter your stop location: ");
 			Stops.add(sc.next());
-		} while(choice=='Y'||choice=='y');
+		}
 		sc.close();
 	}
 	
@@ -32,17 +33,25 @@ public class Bill {
 		char choice;
 		boolean success=true;
 		String pswd;
-		int id, i=0, y;
-		ArrayList<Customer> c=new ArrayList<Customer>(); 
+		int id, i=0, y=0;
+		ArrayList<Customer> c=new ArrayList<Customer>();
 		Customer cs=new Customer();
+		cs.assignC("Lola", 8964323456L, "lola@gmail.com", "lola123");
+		c.add(cs);
+		cs.assignC("Richa", 8798432345L, "richa@gmail.com", "richa123");
+		c.add(cs);		
+		cs.assignC("Sahil", 7892345681L, "sahil@gmail.com", "sahil123");
+		c.add(cs);
+		cs.assignC("Suraj", 9867312345L, "suraj@gmail.com", "suraj123");
+		c.add(cs);
 		Bill b=new Bill();
 		Driver[] D=new Driver[6];
-		D[0].assignD("Raj", 8765439932L, 679032, "Swift", 2356, 100, 40);
-		D[1].assignD("Meghna", 7429174010L, 329874, "i10", 3289, 100, 40);
-		D[2].assignD("Hari", 9270140984L, 438988, "Dzire", 8974, 150, 60);
-		D[3].assignD("John", 9431490234L, 123454, "Honda City", 3839, 150, 60);
-		D[4].assignD("Ravi", 8912376012L, 987433, "Creta", 2414, 200, 100);
-		D[5].assignD("Ginny", 9730147943L, 314433, "Brezza", 4144, 200, 100);		
+		D[0].assignD("Raj", 8765439932L, 679032, "Swift", 2356, 100f, 40f, 1);
+		D[1].assignD("Meghna", 7429174010L, 329874, "i10", 3289, 100f, 40f, -1);
+		D[2].assignD("Hari", 9270140984L, 438988, "Dzire", 8974, 150f, 60f, -1);
+		D[3].assignD("John", 9431490234L, 123454, "Honda City", 3839, 150f, 60f, 1);
+		D[4].assignD("Ravi", 8912376012L, 987433, "Creta", 2414, 200f, 100f, 1);
+		D[5].assignD("Ginny", 9730147943L, 314433, "Brezza", 4144, 200f, 100f, 1);		
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Welcome to CAR RENTAL SERVICES!");
 		System.out.println("If you are a new user, press R to register.");
@@ -108,10 +117,29 @@ public class Bill {
 				y=sc.nextInt();
 				y+=3;
 				break;
-			default: System.out.println("Wrong choice entered. Please enter a valid type: ");
+			default: System.out.println("Wrong choice entered.");
+				success=true;
 			}
-		}while(choice!='H' || choice!='h' || choice!='S' ||choice!='s' || choice!='V' ||choice!='v');
-		D[y].display();
+			if(D[y].isAvailable()==1) {
+				b.Driv=D[y];
+				D[y].display();
+				System.out.println("Confirm booking? (Y/N). If you wish to book another vehicle, enter N.");
+				choice=sc.next().charAt(0);
+				if(choice=='N'||choice=='n') {
+					success=true;
+				}
+				else if(choice=='Y'||choice=='y') {
+					success=false;
+				}
+				else {
+					System.out.println("Wrong choice entered.");
+				}
+			}
+			else {
+				System.out.println("The selected car is unavailable. Please make another choice.");
+				success=true;
+			}
+		}while(success);
 		sc.close();
 	}
 

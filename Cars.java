@@ -1,10 +1,14 @@
 package Cars;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Cars {
 	String Model;
 	int PlateNo;
 	float BasePrice;
 	float StopPrice;
+
 	public float returnBase() {
 		return BasePrice;
 	}
@@ -23,4 +27,5 @@ public class Cars {
 	public int returnPlate() {
 		return PlateNo;
 	}
+	
 }

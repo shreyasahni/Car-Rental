@@ -4,7 +4,8 @@ import java.util.*;
 
 public class Customer {
 	String Name;
-	Long PhoneNo=new Long(0);
+	//Long PhoneNo=new Long(0);
+	long PhoneNo=0;
 	String Email;
 	String Password;
 	int ID;
@@ -14,13 +15,15 @@ public class Customer {
 	public String returnPassword() {
 		return Password;
 	}
-	public void assignC(String nm, long ph, String em, String psw) {
-		Random rand=new Random();
+	public String returnEmail() {
+		return Email;
+	}
+	public void assignC(String nm, long ph, String em, int id, String psw) {
 		Name=nm;
 		PhoneNo=ph;
 		Email=em;
 		Password=psw;
-		ID=rand.nextInt(100);
+		ID=id;
 	}
 	public void register() {
 		Scanner sc=new Scanner(System.in);
@@ -35,7 +38,8 @@ public class Customer {
 		}
 		System.out.println("Phone number: ");
 		PhoneNo=sc.nextLong();
-		while(PhoneNo.toString().length()!=10) {
+		//while(PhoneNo.toString().length()!=10) {
+		while(PhoneNo==0) {
 			System.out.println("Please enter valid details: ");
 			PhoneNo=sc.nextLong();
 		}
@@ -50,10 +54,9 @@ public class Customer {
 			pwd1=sc.next();
 			System.out.println("Retype password: ");
 			pwd2=sc.next();
-		} while(pwd1!=pwd2);
+		} while(!pwd1.equals(pwd2));
 		Password=pwd1;
 		ID=rand.nextInt(100);
-		sc.close();
 	}
 	
 }

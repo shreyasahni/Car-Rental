@@ -1,9 +1,11 @@
-package Bill;
+package tempproject;
 
 import java.util.*;
-import Customer.Customer;
-import Driver.Driver;
-import Cars.*;
+
+class Task1 extends Thread
+{
+	
+}
 
 public class Bill {
 	Customer Cust=new Customer();
@@ -23,15 +25,19 @@ public class Bill {
 		System.out.println("Enter drop location: ");
 		word=sc1.nextLine();
 		Stops.add(word);
-		//enclose following code in do...while
 		System.out.println("Do you have any intermediate stop? (Y/N)");
 		choice=sc1.next().charAt(0);
 		sc1.nextLine();
-		if(choice=='y'||choice=='Y') {
+		//enclose following code in do...while
+		while(choice=='Y' || choice=='y')
+		{
 			System.out.println("Enter your stop location: ");
 			word=sc1.nextLine();
 			Stops.add(word);
-		}
+			System.out.println("Do you have more stops? (Y/N)");
+			choice=sc1.next().charAt(0);
+			sc1.nextLine();
+		};	
 		return;
 	}
 	
@@ -170,7 +176,9 @@ public class Bill {
 				success=true;
 			}
 		}while(success);
+		b.calculateFare();
 		System.out.println("Booking confirmed! Details regarding the booking have been sent to "+b.Cust.returnEmail());
+		System.out.println("Estimated Fare:" + b.Price);
 		System.out.println(b.Driv.getCar().returnModel()+" car has been booked under user ID "+b.Cust.returnID()+".");
 	}
 

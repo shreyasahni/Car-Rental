@@ -23,6 +23,7 @@ public class Bill {
 		System.out.println("Enter drop location: ");
 		word=sc1.nextLine();
 		Stops.add(word);
+		//enclose following code in do...while
 		System.out.println("Do you have any intermediate stop? (Y/N)");
 		choice=sc1.next().charAt(0);
 		sc1.nextLine();
@@ -84,6 +85,7 @@ public class Bill {
 		case 'r':
 			cs.register();
 			c.add(cs);
+			b.Cust=cs;
 			System.out.println("Successfully registered! Your unique user ID is: "+cs.returnID());
 			break;
 		case 'L':
@@ -99,6 +101,7 @@ public class Bill {
 						System.out.println("Logged-in successfully!");
 						y=i;
 						success=true;
+						b.Cust=c.get(y);
 					}
 				}
 				if(!success) {
@@ -111,7 +114,6 @@ public class Bill {
 			System.out.println("Wrong input.");
 			return;
 		}
-		b.Cust=c.get(y);
 		b.addStops();
 		System.out.println("Vehicle types available: Hatchback (H), Sedan (S), SUV (V)");
 		System.out.println("Choose a vehicle type: ");

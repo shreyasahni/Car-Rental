@@ -1,11 +1,9 @@
-package Driver;
+package Person;
 
 import java.util.*;
 import Cars.Cars;
 
-public class Driver {
-	String Name;
-	long Mobile;
+public class Driver extends Person {
 	int Licence;
 	int Available;
 	Cars Car=new Cars();

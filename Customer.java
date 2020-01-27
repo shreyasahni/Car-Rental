@@ -3,9 +3,12 @@ package Person;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Customer {
+abstract class Person {
 	String Name;
-	long PhoneNo=0;
+	long Mobile;
+}
+
+public class Customer extends Person {
 	String Email;
 	String Password;
 	int ID;
@@ -20,7 +23,7 @@ public class Customer {
 	}
 	public void assignC(String nm, long ph, String em, int id, String psw) {
 		Name=nm;
-		PhoneNo=ph;
+		Mobile=ph;
 		Email=em;
 		Password=psw;
 		ID=id;
@@ -37,10 +40,10 @@ public class Customer {
 			Name=sc.nextLine();
 		}
 		System.out.println("Phone number: ");
-		PhoneNo=sc.nextLong();
-		while(PhoneNo==0) {
+		Mobile=sc.nextLong();
+		while(Mobile==0) {
 			System.out.println("Please enter valid details: ");
-			PhoneNo=sc.nextLong();
+			Mobile=sc.nextLong();
 		}
 		System.out.println("Email: ");
 		Email=sc.next();
@@ -59,5 +62,4 @@ public class Customer {
 	}
 	
 }
-
 

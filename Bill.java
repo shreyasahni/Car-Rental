@@ -1,14 +1,8 @@
 package Bill;
-import Customer.Customer;
-import Driver.Driver;
+import Person.*;
 import Cars.*;
 
 import java.util.*;
-
-class Task1 extends Thread
-{
-	
-}
 
 public class Bill {
 	Customer Cust=new Customer();
@@ -31,7 +25,6 @@ public class Bill {
 		System.out.println("Do you have any intermediate stop? (Y/N)");
 		choice=sc1.next().charAt(0);
 		sc1.nextLine();
-		//enclose following code in do...while
 		while(choice=='Y' || choice=='y')
 		{
 			System.out.println("Enter your stop location: ");

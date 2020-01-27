@@ -1,10 +1,10 @@
-package Customer;
+package Person;
 
-import java.util.*;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Customer {
 	String Name;
-	//Long PhoneNo=new Long(0);
 	long PhoneNo=0;
 	String Email;
 	String Password;
@@ -38,7 +38,6 @@ public class Customer {
 		}
 		System.out.println("Phone number: ");
 		PhoneNo=sc.nextLong();
-		//while(PhoneNo.toString().length()!=10) {
 		while(PhoneNo==0) {
 			System.out.println("Please enter valid details: ");
 			PhoneNo=sc.nextLong();
@@ -60,3 +59,5 @@ public class Customer {
 	}
 	
 }
+
+

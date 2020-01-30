@@ -4,6 +4,56 @@ import Cars.*;
 
 import java.util.*;
 
+class task1 extends Thread
+{
+	public static ArrayList<Customer> c=new ArrayList<Customer>();
+	
+	public void run()
+	{
+		Customer cs=new Customer();
+		Customer cs1=new Customer();
+		Customer cs2=new Customer();
+		Customer cs3=new Customer();
+		Customer cs4=new Customer();
+		cs1.assignC("Lola", 8964323456L, "lola@gmail.com", 234, "lola123");
+		c.add(cs1);
+		cs2.assignC("Richa", 8798432345L, "richa@gmail.com", 123, "richa123");
+		c.add(cs2);		
+		cs3.assignC("Sahil", 7892345681L, "sahil@gmail.com", 100, "sahil123");
+		c.add(cs3);
+		cs4.assignC("Suraj", 9867312345L, "suraj@gmail.com", 200, "suraj123");
+		c.add(cs4);
+	}
+}
+
+class task2 extends Thread
+{
+	public static ArrayList<Driver> d=new ArrayList<Driver>();
+	public void run()
+	{
+		Driver dv=new Driver();
+		Driver dv1=new Driver();
+		Driver dv2=new Driver();
+		Driver dv3=new Driver();
+		Driver dv4=new Driver();
+		Driver dv5=new Driver();
+		Driver dv6=new Driver();
+		dv1.assignD("Raj", 8765439932L, 679032, "Swift", 2356, 100f, 40f, 1);
+		d.add(dv1);
+		dv2.assignD("Meghna", 7429174010L, 329874, "i10", 3289, 100f, 40f, -1);
+		d.add(dv2);
+		dv3.assignD("Hari", 9270140984L, 438988, "Dzire", 8974, 150f, 60f, -1);
+		d.add(dv3);		
+		dv4.assignD("John", 9431490234L, 123454, "Honda City", 3839, 150f, 60f, 1);
+		d.add(dv4);		
+		dv5.assignD("Ravi", 8912376012L, 987433, "Creta", 2414, 200f, 100f, 1);
+		d.add(dv5);		
+		dv6.assignD("Ginny", 9730147943L, 314433, "Brezza", 4144, 200f, 100f, 1);
+		d.add(dv6);	
+	}
+	
+}
+
 public class Bill {
 	Customer Cust=new Customer();
 	Driver Driv=new Driver();
@@ -42,41 +92,13 @@ public class Bill {
 		boolean success=false;
 		String pswd;
 		int id, i=0, x=0, y=0;
-		ArrayList<Customer> c=new ArrayList<Customer>();
-		ArrayList<Driver> d=new ArrayList<Driver>();
 		Customer cs=new Customer();
-		Customer cs1=new Customer();
-		Customer cs2=new Customer();
-		Customer cs3=new Customer();
-		Customer cs4=new Customer();
 		Driver dv=new Driver();
-		Driver dv1=new Driver();
-		Driver dv2=new Driver();
-		Driver dv3=new Driver();
-		Driver dv4=new Driver();
-		Driver dv5=new Driver();
-		Driver dv6=new Driver();
 		Bill b=new Bill();
-		cs1.assignC("Lola", 8964323456L, "lola@gmail.com", 234, "lola123");
-		c.add(cs1);
-		cs2.assignC("Richa", 8798432345L, "richa@gmail.com", 123, "richa123");
-		c.add(cs2);		
-		cs3.assignC("Sahil", 7892345681L, "sahil@gmail.com", 100, "sahil123");
-		c.add(cs3);
-		cs4.assignC("Suraj", 9867312345L, "suraj@gmail.com", 200, "suraj123");
-		c.add(cs4);
-		dv1.assignD("Raj", 8765439932L, 679032, "Swift", 2356, 100f, 40f, 1);
-		d.add(dv1);
-		dv2.assignD("Meghna", 7429174010L, 329874, "i10", 3289, 100f, 40f, -1);
-		d.add(dv2);
-		dv3.assignD("Hari", 9270140984L, 438988, "Dzire", 8974, 150f, 60f, -1);
-		d.add(dv3);		
-		dv4.assignD("John", 9431490234L, 123454, "Honda City", 3839, 150f, 60f, 1);
-		d.add(dv4);		
-		dv5.assignD("Ravi", 8912376012L, 987433, "Creta", 2414, 200f, 100f, 1);
-		d.add(dv5);		
-		dv6.assignD("Ginny", 9730147943L, 314433, "Brezza", 4144, 200f, 100f, 1);
-		d.add(dv6);	
+		task1 t1 = new task1();
+		task2 t2 = new task2();
+		t1.start();
+		t2.start();
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Welcome to CAR RENTAL SERVICES!");
 		System.out.println("If you are a new user, press R to register.");
@@ -86,7 +108,7 @@ public class Bill {
 		case 'R':
 		case 'r':
 			cs.register();
-			c.add(cs);
+			task1.c.add(cs);
 			b.Cust=cs;
 			System.out.println("Successfully registered! Your unique user ID is: "+cs.returnID());
 			break;
@@ -97,13 +119,13 @@ public class Bill {
 				id=sc.nextInt();
 				System.out.println("Enter password: ");
 				pswd=sc.next();
-				for(i=0;i<c.size();i++) {
-					cs=c.get(i);
+				for(i=0;i<task1.c.size();i++) {
+					cs=task1.c.get(i);
 					if(id==cs.returnID() && pswd.equals(cs.returnPassword())) {
 						System.out.println("Logged-in successfully!");
 						y=i;
 						success=true;
-						b.Cust=c.get(y);
+						b.Cust=task1.c.get(y);
 					}
 				}
 				if(!success) {
@@ -145,30 +167,33 @@ public class Bill {
 				x=sc.nextInt();
 				x+=3;
 				break;
-			default: System.out.println("Wrong choice entered.");
-				success=true;
-				return;
 			}
-			dv=d.get(x);
-			if(dv.isAvailable()==1) {
-				b.Driv=dv;
-				dv.display();
-				System.out.println("To confirm booking, enter Y.");
-				System.out.println("If you wish to book another vehicle, enter N.");
-				choice2=sc.next().charAt(0);
-				if(choice2=='N'||choice2=='n') {
-					success=true;
-				}
-				else if(choice2=='Y'||choice2=='y') {
-					success=false;
+			try {
+				dv=task2.d.get(x);
+				if(dv.isAvailable()==1) {
+					b.Driv=dv;
+					dv.display();
+					System.out.println("To confirm booking, enter Y.");
+					System.out.println("If you wish to book another vehicle, enter N.");
+					choice2=sc.next().charAt(0);
+					if(choice2=='N'||choice2=='n') {
+						success=true;
+					}
+					else if(choice2=='Y'||choice2=='y') {
+						success=false;
+					}
+					else {
+						System.out.println("Wrong choice entered.");
+						return;
+					}
 				}
 				else {
-					System.out.println("Wrong choice entered.");
-					return;
+					System.out.println("The selected car is unavailable. Please make another choice: ");
+					success=true;
 				}
 			}
-			else {
-				System.out.println("The selected car is unavailable. Please make another choice: ");
+			catch (IndexOutOfBoundsException E) {
+				System.out.println("Wrong choice inputted. Please enter correct choice.");
 				success=true;
 			}
 		}while(success);
